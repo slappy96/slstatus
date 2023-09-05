@@ -65,9 +65,13 @@ static const struct arg args[] = {
 	/* function format          argument */
 	{ cpu_perc, " %s%%|",	NULL    },
 	{ ram_used, " %s|",	NULL    },
-	{ disk_used, " %s|",  "/"    },
-	{ battery_perc, " %s%%|",  "BAT0"    },
-	{ wifi_perc, " %s%%|", 	"wlan0"	},
+	{ disk_free, "root  %s|",  "/"    },
+	{ disk_free, "boot  %s|",  "/boot"    },
+	{ disk_free, "home  %s|",  "/home"    },
+	{ disk_free, "gm1  %s|",  "/game1"    },
+	{ disk_free, "gm2  %s|",  "/game2"    },
+     /*	{ battery_perc, " %s%%|",  "BAT0"    },
+	{ wifi_perc, " %s%%|", 	"wlan0"	}, */
 	{ datetime, "%s",           "%a, %b %d %R" },
 
 };
