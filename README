@@ -1,63 +1,51 @@
-slstatus - suckless status
+slstatus - slappy custom
 ==========================
-slstatus is a suckless status monitor for window managers that use WM_NAME
-(e.g. dwm) or stdin to fill the status bar.
+slstatus is a suckless status monitor/bar that just works without all the huff 
 
 
-Features
---------
-- Battery percentage/state/time left
-- CPU usage
-- CPU frequency
-- Custom shell commands
-- Date and time
-- Disk status (free storage, percentage, total storage and used storage)
-- Available entropy
-- Username/GID/UID
-- Hostname
-- IP address (IPv4 and IPv6)
-- Kernel version
-- Keyboard indicators
-- Keymap
-- Load average
-- Network speeds (RX and TX)
-- Number of files in a directory (hint: Maildir)
-- Memory status (free memory, percentage, total memory and used memory)
-- Swap status (free swap, percentage, total swap and used swap)
-- Temperature
-- Uptime
-- Volume percentage (OSS/ALSA)
-- WiFi signal percentage and ESSID
+Features Included
+-----------------
+  function            description                     argument (example)
+  --------            -----------                     ------------------
+  battery_perc        battery percentage              battery name (BAT0)
+  cpu_perc            cpu usage in percent            NULL
+  disk_free           free disk space in GB           mountpoint path (/)
+  ram_used            used memory in GB               NULL
+  run_command         custom shell command            command (echo foo)
+  swap_free           free swap in GB                 NULL
+  swap_perc           swap usage in percent           NULL
+  swap_total          total swap size in GB           NULL
+  swap_used           used swap in GB                 NULL
+  temp                temperature in degree celsius   sensor file
+  wifi_perc           WiFi signal in percent          interface name (wlan0)
+ 
+=============================================================================
+Example of code in config.h below
+=============================================================================
+static const struct arg args[] = {
+	/* function format          argument */
+	{ cpu_perc, " %s%%|",	NULL    },
+	{ ram_used, " %s|",	NULL    },
+	{ disk_free, "root  %s|",  "/"    },
+	{ disk_free, "boot  %s|",  "/boot"    },
+	{ disk_free, "home  %s|",  "/home"    },
+	{ disk_free, "gm1  %s|",  "/game1"    },
+	{ disk_free, "gm2  %s|",  "/game2"    },
+     /*	{ battery_perc, " %s%%|",  "BAT0"    },
+	{ wifi_perc, " %s%%|", 	"wlan0"	}, */
+	{ datetime, "%s",           "%a, %b %d %R" },
 
+};
+============================================================================
 
-Requirements
-------------
-Currently slstatus works on FreeBSD, Linux and OpenBSD.
-In order to build slstatus you need the Xlib header files.
+INSTALL
+1. clone - git clone https://github.com/slappy96/slstatus.git
+2. cd st
+3. make
+4. sudo make install
 
+CLEAN UP object files and executable
+1. sudo make clean
 
-Installation
-------------
-Edit config.mk to match your local setup (slstatus is installed into the
-/usr/local namespace by default).
-
-Afterwards enter the following command to build and install slstatus (if
-necessary as root):
-
-    make clean install
-
-
-Running slstatus
-----------------
-See the man page for details.
-
-
-Configuration
--------------
-slstatus can be customized by creating a custom config.h and (re)compiling the
-source code. This keeps it fast, secure and simple.
-
-
-Todo
-----
-Cleaning up the whole codebase it the goal before thinking about a release.
+UN-INSTALL
+1. sudo make uninstall
